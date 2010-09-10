@@ -7,8 +7,7 @@
 #Rserve(args="--no-save")
 
 #setwd("/mydir/")
-source("extra_functions.R")
-source("plot_summary_formula_response_CIs.R")
+source("helper_functions.R")
 
 
 #### READ DATA
@@ -418,7 +417,7 @@ for (ii in 0:(sections-1)) {
     s = summary(dataset.in.geo.or.ae.int ~ ., dat.untransformed[,names(dat.untransformed) %in% mynames.section], continuous = 3)
     #s
     #quartz()
-    filename = paste("dotplot-vars-", ii, ".tiff", sep="")  #or pdf
+    filename = paste("figureS", ii+1, ".tiff", sep="")  #or pdf
     print(filename)
     tiff(filename, width=7, height=10, units="in", compression="none", res=300)
     par(mai=c(1,6,0.2,1)) # bottom, left, top, right
@@ -707,6 +706,13 @@ par(bg="white")
 plot.summary.rms.norangelabels(summ.1st.nonlinear.interactions.reduced, q = c(0.95), col=gray(0.5), log=T, cex=0.9, width=0.01, cex.c=0.001, at=c(0.25, 0.5, 1, 2, 4, 8))
 title("Multivariate nonlinear regressions with interactions")
 
+tiff("figure4.tiff", width=7, height=7, units="in", compression="none", res=300)
+par(bg="white")
+plot.summary.rms.norangelabels(summ.1st.nonlinear.interactions.reduced, q = c(0.95), col=gray(0.5), log=T, cex=0.9, width=0.01, cex.c=0.001, at=c(0.25, 0.5, 1, 2, 4, 8))
+title("Multivariate nonlinear regressions with interactions")
+dev.off()
+
+
 ### Dots of first-order factors
 dat.regress.named = dat.regress
 names(dat.regress.named) = c("dataset.in.geo.or.ae.int", factor.names.1st[names(dat.regress)[-1]])
@@ -719,7 +725,7 @@ plot.summary.formula.response.CIs(dots.1st.nonlinear.interactions.reduced, width
 #plot.summary.formula.response
 #?summary.formula
 
-tiff("dotplot-firstorder.tiff", width=7, height=7, units="in", compression="none", res=300)
+tiff("figure3.tiff", width=7, height=7, units="in", compression="none", res=300)
 par(mai=c(1,6,0.1,1)) # bottom, left, top, right
 plot.summary.formula.response.CIs(dots.1st.nonlinear.interactions.reduced, width.factor=2, cex.labels=0.4, cex=0.9, xlim=c(0,1), 
     xlab="Proportion of studies with datasets\nfound in GEO or ArrayExpress", 
@@ -775,7 +781,11 @@ par(bg="white")
 plot.summary.rms.norangelabels(summ.2nd.nonlinear.interactions.reduced, q = c(0.95), col=gray(0.5), log=T, cex=0.9, width=0.01, cex.c=0.001, at=c(0.25, 0.5, 1, 2, 4))
 title("Multivariate nonlinear regression with interactions")
 
-plot.summary.rms.norangelabels(summ.2nd.nonlinear.interactions.reduced, q = c(0.95), col=gray(0.5), log=T, cex=1, width=0.01)
+tiff("figure6.tiff", width=7, height=5, units="in", compression="none", res=300)
+par(bg="white")
+plot.summary.rms.norangelabels(summ.2nd.nonlinear.interactions.reduced, q = c(0.95), col=gray(0.5), log=T, cex=0.9, width=0.01, cex.c=0.001, at=c(0.25, 0.5, 1, 2, 4))
+title("Multivariate nonlinear regression with interactions")
+dev.off()
 
 ### Dots of second-order factors
 dat.regress.2nd.named = dat.regress.2nd
@@ -786,7 +796,7 @@ dots.2nd.nonlinear.interactions.reduced = summary(dataset.in.geo.or.ae.int ~ .,
 dots.2nd.nonlinear.interactions.reduced
 plot.summary.formula.response.CIs(dots.2nd.nonlinear.interactions.reduced, width.factor=2, cex.labels=0.5, cex=0.7)
 
-tiff("dotplot-secondorder.tiff", width=7, height=5, units="in", compression="none", res=300)
+tiff("figure5.tiff", width=7, height=5, units="in", compression="none", res=300)
 par(mai=c(1,6,0.1,1)) # bottom, left, top, right
 plot.summary.formula.response.CIs(dots.2nd.nonlinear.interactions.reduced, width.factor=2, cex.labels=0.4, cex=0.9, xlim=c(0,1), 
     xlab="Proportion of studies with datasets\nfound in GEO or ArrayExpress", 
@@ -918,7 +928,7 @@ s = summary(dataset.in.geo.or.ae.int ~ journal.factor, dat.journals)
 s
 plot.summary.formula.response.CIs(s, cex.labels=0.5, xlim=c(0,1))
 
-filename = paste("dotplot-journals.tiff", sep="")
+filename = paste("figure2.tiff", sep="")
 print(filename)
 tiff(filename, width=7, height=10, compression="none", units="inches", res=300)  # or can do pdf
 par(mai=c(1,6,0.2,1)) # bottom, left, top, right
