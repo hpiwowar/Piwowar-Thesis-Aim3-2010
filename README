@@ -1,0 +1,13 @@
+This is the raw stat code and data behind Aim 3 in Heather Piwowar's PhD dissertation:
+
+Piwowar, HA.  Foundational studies for measuring the impact, prevalence, and patterns of  publicly sharing biomedical research data. PhD dissertation.  March 24, 2010. Department of Biomedical Informatics, University of Pittsburgh.
+
+http://etd.library.pitt.edu/ETD/available/etd-04152010-115953/
+
+For more information on data collection software, other parts of the dissertation, and my current work, please see my website:
+
+http://researchremix.org
+
+I run this code by bringing up the R Console on my mac, then:
+> setwd("mydir/")
+> source("aim3_stats_20100320.R")

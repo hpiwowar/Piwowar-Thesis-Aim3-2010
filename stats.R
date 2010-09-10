@@ -1,25 +1,12 @@
-### To do
-#### Hunt down the missing max_money variables, first year of funding variables, last year of funding
-## Calculate number of years since beginning of funding, number of years till end of funding?
-#### make as NA anyone who has more than xxxx articles
-### Look into that one strange variable about journal policy that doesn't correlate with others
-### Give PLoS ONE an impact factor of 3???  gets me a whole lot more data, better than imputing?
-# Get rid of the raw "cites" journal variable because it could mean so many things?
-
-
 # to get latex to work, first in the R GUI go to 
 # Misc, start X11 server
 # And execute the following line
 #Sys.setenv( PATH=paste(Sys.getenv("PATH"),"/usr/texbin",sep=":") ) 
 
-
 #library(Rserve)
 #Rserve(args="--no-save")
 
-
-
-#setwd("/Users/hpiwowar/Documents/Code/hpiwowar/pypub/trunk/src/aim3/stats")
-setwd("/Users/hpiwowar/Dropbox/Thesis Defense/")
+#setwd("/mydir/")
 source("aim3_functions_20100215.R")
 source("plot_summary_formula_response_CIs.R")
 
@@ -431,9 +418,9 @@ for (ii in 0:(sections-1)) {
     s = summary(dataset.in.geo.or.ae.int ~ ., dat.untransformed[,names(dat.untransformed) %in% mynames.section], continuous = 3)
     #s
     #quartz()
-    filename = paste("dotplot-vars-", ii, ".pdf", sep="")
+    filename = paste("dotplot-vars-", ii, ".tiff", sep="")  #or pdf
     print(filename)
-    pdf(filename, width=7, height=10)
+    tiff(filename, width=7, height=10)
     par(mai=c(1,6,0.2,1)) # bottom, left, top, right
     plot.summary.formula.response.CIs(s, width.factor=2, cex.labels=0.4, cex=0.9, xlim=c(0,1), xlab="Proportion of studies with datasets\nfound in GEO or ArrayExpress", main="")
     dev.off()
@@ -455,6 +442,15 @@ lineplot.CI(x.factor = pubmed.year.published,
             xlab="Year article published", ylab="Proportion of articles with datasets found in GEO or ArrayExpress")
 title(main="Proportion of articles with shared datasets, by year")
 
+tiff("figure1.tiff")
+par(bg="white")
+lineplot.CI(x.factor = pubmed.year.published, 
+            response = in.ae.or.geo, 
+            data = dat.nums, 
+            subset = dat.nums$pubmed.year.published<2010, 
+            xlab="Year article published", ylab="Proportion of articles with datasets found in GEO or ArrayExpress")
+title(main="Proportion of articles with shared datasets, by year")
+dev.off()
 
 ############## Prep data for stats
 
@@ -499,7 +495,7 @@ library(gplots)
 #data.sharing.colours = colorpanel(20,low="red",high="green")[10 * (1 + round(mycor.data.sharing.relevant, 1))]
 #heatmap.3(mycor, ColSideColors=data.sharing.colours, col=cm.colors, cexRow=0.5, cexCol = .8, symm = TRUE, dend = "row", trace = "none", main = "Thesis Data", margins=c(15,15), key=FALSE, keysize=0.1)
 
-#pdf("heatmap.pdf", height=10, width=10)
+#tiff("heatmap.tiff", height=10, width=10)
 #heatmap.2(mycor, col=bluered(16), cexRow=0.5, cexCol = .8, symm = TRUE, dend = "row", trace = "none", main = "Thesis Data", margins=c(15,15), key=FALSE, keysize=0.1)
 #dev.off
 
@@ -723,7 +719,7 @@ plot.summary.formula.response.CIs(dots.1st.nonlinear.interactions.reduced, width
 #plot.summary.formula.response
 #?summary.formula
 
-pdf("dotplot-firstorder.pdf", width=7, height=7)
+tiff("dotplot-firstorder.tiff", width=7, height=7)  # or pdf
 par(mai=c(1,6,0.1,1)) # bottom, left, top, right
 plot.summary.formula.response.CIs(dots.1st.nonlinear.interactions.reduced, width.factor=2, cex.labels=0.4, cex=0.9, xlim=c(0,1), 
     xlab="Proportion of studies with datasets\nfound in GEO or ArrayExpress", 
@@ -790,7 +786,7 @@ dots.2nd.nonlinear.interactions.reduced = summary(dataset.in.geo.or.ae.int ~ .,
 dots.2nd.nonlinear.interactions.reduced
 plot.summary.formula.response.CIs(dots.2nd.nonlinear.interactions.reduced, width.factor=2, cex.labels=0.5, cex=0.7)
 
-pdf("dotplot-secondorder.pdf", width=7, height=5)
+tiff("dotplot-secondorder.tiff", width=7, height=5)
 par(mai=c(1,6,0.1,1)) # bottom, left, top, right
 plot.summary.formula.response.CIs(dots.2nd.nonlinear.interactions.reduced, width.factor=2, cex.labels=0.4, cex=0.9, xlim=c(0,1), 
     xlab="Proportion of studies with datasets\nfound in GEO or ArrayExpress", 
@@ -922,9 +918,9 @@ s = summary(dataset.in.geo.or.ae.int ~ journal.factor, dat.journals)
 s
 plot.summary.formula.response.CIs(s, cex.labels=0.5, xlim=c(0,1))
 
-filename = paste("dotplot-journals.pdf", sep="")
+filename = paste("dotplot-journals.tiff", sep="")
 print(filename)
-pdf(filename, width=7, height=10)
+tiff(filename, width=7, height=10)  # or can do pdf
 par(mai=c(1,6,0.2,1)) # bottom, left, top, right
 plot.summary.formula.response.CIs(s, width.factor=2, cex.labels=0.5, cex=0.9, xlim=c(0,1), xlab="Proportion of studies with datasets\nfound in GEO or ArrayExpress", main="")
 dev.off()
@@ -1003,8 +999,6 @@ bargraph.CI(x.factor = cut(dat.institutions$institution.rank, breaks=seq(0, 2000
             err.col=grey(.5))
 #bargraph.CI(x.factor = cut(log(dat.institutions$journal.impact.factor), breaks=seq(0, 4, 0.5)), 
             
-bargraph.CI(x.factor = pubmed.number.authors, 
-
 
 library(gplots)
 quartz(height=5, width=5)
