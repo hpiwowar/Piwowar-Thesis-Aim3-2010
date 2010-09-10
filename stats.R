@@ -419,7 +419,7 @@ for (ii in 0:(sections-1)) {
     #quartz()
     filename = paste("figureS", ii+1, ".tiff", sep="")  #or pdf
     print(filename)
-    tiff(filename, width=7, height=10, units="in", compression="none", res=300)
+    tiff(filename, width=7, height=10, units="in", compression="lzw", res=300)
     par(mai=c(1,6,0.2,1)) # bottom, left, top, right
     plot.summary.formula.response.CIs(s, width.factor=2, cex.labels=0.4, cex=0.9, xlim=c(0,1), xlab="Proportion of studies with datasets\nfound in GEO or ArrayExpress", main="")
     dev.off()
@@ -441,7 +441,7 @@ lineplot.CI(x.factor = pubmed.year.published,
             xlab="Year article published", ylab="Proportion of articles with datasets found in GEO or ArrayExpress")
 title(main="Proportion of articles with shared datasets, by year")
 
-tiff("figure1.tiff", width=7, height=7, units="in", compression="none", res=300)
+tiff("figure1.tiff", width=7, height=7, units="in", compression="lzw", res=300)
 par(bg="white")
 lineplot.CI(x.factor = pubmed.year.published, 
             response = in.ae.or.geo, 
@@ -494,7 +494,7 @@ library(gplots)
 #data.sharing.colours = colorpanel(20,low="red",high="green")[10 * (1 + round(mycor.data.sharing.relevant, 1))]
 #heatmap.3(mycor, ColSideColors=data.sharing.colours, col=cm.colors, cexRow=0.5, cexCol = .8, symm = TRUE, dend = "row", trace = "none", main = "Thesis Data", margins=c(15,15), key=FALSE, keysize=0.1)
 
-#tiff("heatmap.tiff", height=10, width=10, units="in", compression="none", res=300)
+#tiff("heatmap.tiff", height=10, width=10, units="in", compression="lzw", res=300)
 #heatmap.2(mycor, col=bluered(16), cexRow=0.5, cexCol = .8, symm = TRUE, dend = "row", trace = "none", main = "Thesis Data", margins=c(15,15), key=FALSE, keysize=0.1)
 #dev.off
 
@@ -708,10 +708,9 @@ par(bg="white")
 plot.summary.rms.norangelabels(summ.1st.nonlinear.interactions.reduced, q = c(0.95), col=gray(0.5), log=T, cex=0.9, width=0.01, cex.c=0.001, at=c(0.25, 0.5, 1, 2, 4, 8))
 title("Multivariate nonlinear regressions with interactions")
 
-tiff("figure4.tiff", width=7, height=7, units="in", compression="none", res=300)
+tiff("figure4.tiff", width=7, height=5, units="in", compression="lzw", res=300)
 par(bg="white")
 plot.summary.rms.norangelabels(summ.1st.nonlinear.interactions.reduced, q = c(0.95), col=gray(0.5), log=T, cex=0.9, width=0.01, cex.c=0.001, at=c(0.25, 0.5, 1, 2, 4, 8))
-title("Multivariate nonlinear regressions with interactions")
 dev.off()
 
 
@@ -727,7 +726,7 @@ plot.summary.formula.response.CIs(dots.1st.nonlinear.interactions.reduced, width
 #plot.summary.formula.response
 #?summary.formula
 
-tiff("figure3.tiff", width=7, height=7, units="in", compression="none", res=300)
+tiff("figure3.tiff", width=7, height=7, units="in", compression="lzw", res=300)
 par(mai=c(1,6,0.1,1)) # bottom, left, top, right
 plot.summary.formula.response.CIs(dots.1st.nonlinear.interactions.reduced, width.factor=2, cex.labels=0.4, cex=0.9, xlim=c(0,1), 
     xlab="Proportion of studies with datasets\nfound in GEO or ArrayExpress", 
@@ -783,10 +782,9 @@ par(bg="white")
 plot.summary.rms.norangelabels(summ.2nd.nonlinear.interactions.reduced, q = c(0.95), col=gray(0.5), log=T, cex=0.9, width=0.01, cex.c=0.001, at=c(0.25, 0.5, 1, 2, 4))
 title("Multivariate nonlinear regression with interactions")
 
-tiff("figure6.tiff", width=7, height=3, units="in", compression="none", res=300)
+tiff("figure6.tiff", width=7, height=3, units="in", compression="lzw", res=300)
 par(bg="white")
 plot.summary.rms.norangelabels(summ.2nd.nonlinear.interactions.reduced, q = c(0.95), col=gray(0.5), log=T, cex=0.9, width=0.01, cex.c=0.001, at=c(0.25, 0.5, 1, 2, 4))
-title("Multivariate nonlinear regression with interactions")
 dev.off()
 
 ### Dots of second-order factors
@@ -798,7 +796,7 @@ dots.2nd.nonlinear.interactions.reduced = summary(dataset.in.geo.or.ae.int ~ .,
 dots.2nd.nonlinear.interactions.reduced
 plot.summary.formula.response.CIs(dots.2nd.nonlinear.interactions.reduced, width.factor=2, cex.labels=0.5, cex=0.7)
 
-tiff("figure5.tiff", width=7, height=5, units="in", compression="none", res=300)
+tiff("figure5.tiff", width=7, height=5, units="in", compression="lzw", res=300)
 par(mai=c(1,6,0.1,1)) # bottom, left, top, right
 plot.summary.formula.response.CIs(dots.2nd.nonlinear.interactions.reduced, width.factor=2, cex.labels=0.4, cex=0.9, xlim=c(0,1), 
     xlab="Proportion of studies with datasets\nfound in GEO or ArrayExpress", 
@@ -932,7 +930,7 @@ plot.summary.formula.response.CIs(s, cex.labels=0.5, xlim=c(0,1))
 
 filename = paste("figure2.tiff", sep="")
 print(filename)
-tiff(filename, width=7, height=10, compression="none", units="in", res=300)  # or can do pdf
+tiff(filename, width=7, height=10, compression="lzw", units="in", res=300)  # or can do pdf
 par(mai=c(1,6,0.2,1)) # bottom, left, top, right
 plot.summary.formula.response.CIs(s, width.factor=2, cex.labels=0.5, cex=0.9, xlim=c(0,1), xlab="Proportion of studies with datasets\nfound in GEO or ArrayExpress", main="")
 dev.off()
