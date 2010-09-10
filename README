@@ -10,4 +10,4 @@ http://researchremix.org
 
 I run this code by bringing up the R Console on my mac, then:
 > setwd("mydir/")
-> source("aim3_stats_20100320.R")
+> source("stats.R")
