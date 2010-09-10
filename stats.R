@@ -699,9 +699,11 @@ f.1st.nonlinear.interactions.reduced = lrm(formula = dataset.in.geo.or.ae.int ~
     dat=dat.regress, x=T, y=T)
 anova(f.1st.nonlinear.interactions.reduced)
 
-summ.1st.nonlinear.interactions.reduced = summary(f.1st.nonlinear.interactions.reduced)
+summ.1st.nonlinear.interactions.reduced = with(dat.regress, summary(f.1st.nonlinear.interactions.reduced))
+summ.1st.nonlinear.interactions.reduced
 summ.1st.nonlinear.interactions.reduced.dimnames = dimnames(summ.1st.nonlinear.interactions.reduced)[[1]][seq(1,length(dimnames(summ.1st.nonlinear.interactions.reduced)[[1]]),2)]
 dimnames(summ.1st.nonlinear.interactions.reduced)[[1]][seq(1,length(dimnames(summ.1st.nonlinear.interactions.reduced)[[1]]),2)] = factor.names.1st[summ.1st.nonlinear.interactions.reduced.dimnames]
+
 par(bg="white")
 plot.summary.rms.norangelabels(summ.1st.nonlinear.interactions.reduced, q = c(0.95), col=gray(0.5), log=T, cex=0.9, width=0.01, cex.c=0.001, at=c(0.25, 0.5, 1, 2, 4, 8))
 title("Multivariate nonlinear regressions with interactions")
@@ -781,7 +783,7 @@ par(bg="white")
 plot.summary.rms.norangelabels(summ.2nd.nonlinear.interactions.reduced, q = c(0.95), col=gray(0.5), log=T, cex=0.9, width=0.01, cex.c=0.001, at=c(0.25, 0.5, 1, 2, 4))
 title("Multivariate nonlinear regression with interactions")
 
-tiff("figure6.tiff", width=7, height=5, units="in", compression="none", res=300)
+tiff("figure6.tiff", width=7, height=3, units="in", compression="none", res=300)
 par(bg="white")
 plot.summary.rms.norangelabels(summ.2nd.nonlinear.interactions.reduced, q = c(0.95), col=gray(0.5), log=T, cex=0.9, width=0.01, cex.c=0.001, at=c(0.25, 0.5, 1, 2, 4))
 title("Multivariate nonlinear regression with interactions")
@@ -930,7 +932,7 @@ plot.summary.formula.response.CIs(s, cex.labels=0.5, xlim=c(0,1))
 
 filename = paste("figure2.tiff", sep="")
 print(filename)
-tiff(filename, width=7, height=10, compression="none", units="inches", res=300)  # or can do pdf
+tiff(filename, width=7, height=10, compression="none", units="in", res=300)  # or can do pdf
 par(mai=c(1,6,0.2,1)) # bottom, left, top, right
 plot.summary.formula.response.CIs(s, width.factor=2, cex.labels=0.5, cex=0.9, xlim=c(0,1), xlab="Proportion of studies with datasets\nfound in GEO or ArrayExpress", main="")
 dev.off()
@@ -990,7 +992,6 @@ bargraph.CI.ordered(x.factor = institutions.factor,
             err.col=grey(.5))
 
 dat.funding = dat.raw
-dat.sum.sum.dollars = cut(dat.funding)
 quartz()
 par(omi=c(0, 0, 0, 0))
 par(bg="white")
@@ -1015,6 +1016,6 @@ quartz(height=5, width=5)
 row.names(fit.fa.1st.cor) = factor.names.1st[dimnames(fit.fa.1st$loadings)[[2]]]
 dimnames(fit.fa.1st.cor)[[2]] = factor.names.1st[dimnames(fit.fa.1st$loadings)[[2]]]
 par(bg="white")
-heatmap.2(fit.fa.1st.cor, col=bluered(16), cexRow=0.8, cexCol=0.8, symm = TRUE, 
-    dend = "row", trace = "none", main = "Thesis Data", margins=c(15,15), key=FALSE, keysize=0.1)
+# heatmap.2(fit.fa.1st.cor, col=bluered(16), cexRow=0.8, cexCol=0.8, symm = TRUE, 
+#    dend = "row", trace = "none", main = "Thesis Data", margins=c(15,15), key=FALSE, keysize=0.1)
 
